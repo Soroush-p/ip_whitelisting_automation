@@ -1,0 +1,1 @@
+The Python app runs on port 8080, the python code reads the CSV files and repalce the variable in the HTML tempalte file with the urls.
