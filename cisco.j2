@@ -1,0 +1,13 @@
+{% if contextname != "none" -%}
+ changeto context {{ context }}
+{% endif -%}
+conf t
+object-group network {{ objectname }}
+{% for item in iplist -%}
+	{%- if iplist[item].netmask == "255.255.255.255" -%}
+		network-object host {{ iplist[item].address }}
+	{%- else -%}
+		network-object {{ iplist[item].address }} {{ iplist[item].netmask }}
+	{%- endif %}
+{% endfor -%}
+access-list {{ intin }} extended permit tcp object-group {{ objectname }} host {{ dstip }} eq {{ port }} log

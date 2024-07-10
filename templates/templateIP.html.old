@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+
+<html>
+	<header>
+		<title>Whitelisting Form</title>
+		<link rel="stylesheet" type="text/css" href="{{ static_url('css/style.css') }}">
+		<link rel="stylesheet" type="text/css" href="{{ static_url('css/jquery-ui.css') }}">
+		<script src="./static/js/jquery-3.2.1.js"></script>
+		<script src="./static/js/jquery-ui.js"></script>
+                <script src="./static/js/ready.js"></script>
+	</header>
+	<head>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<style>
+
+/* Create two equal columns that floats next to each other */
+.column {
+  float: left;
+  width: 50%;
+  padding: 10px;
+  height: 300px; /* Should be removed. Only for demonstration */
+}
+
+/* Clear floats after the columns */
+.row:after {
+  content: "";
+  display: table;
+  clear: both;
+}
+</style>
+</head>
+	<body style="background-color: #2H0280">
+			<div id="sec_set">
+				<form id="form" name="whitelistform" action="/form">
+					<fieldset>
+					<legend>IP Whitelisting Form</legend>
+                    		<div class= "row" style="height: 700px;">
+								<div id="div-col1" class="column" style="width: 500px;float: center; text-align: center">
+									<label>Endpoint / URL</label><br>
+
+									<select type="text" id="url_drpbx" class="dropbox" style="width: 250px;" name="drpbx_URL"><br>
+										{% for url in urls %}
+											<option>{{ url }}</option>
+										{% end %}
+									</select><br>
+									
+									<label>Firewall</label><br>
+
+									<input type="text" id="firewall_txt" class="txtbx" style="width: 100px;" name="txt_firewall" value="{{  firewall }}"><br>
+									
+									<label>Management IP</label><br>
+									<input type="text" id="mgmtIP_txt" class="txtbx" style="width: 100px;" name="txt_mgmtIP" value="{{ mgmtIP }}" readonly /><br>
+									<label >firewall Context</label><br>
+									<input type="text" id="contextName_txt" class="txtbx" style="width: 100px;" name="txt_contextName" value="{{ contextName }}" readonly ><br>
+									<p></p>
+									<p></p>
+
+									<label>Interface In / Access-list</label><br>
+									<input id="intin_txt" class="txtbx" style="width: 100px;" name="txt_intin" value="{{ intin }}"><br>
+<label>Interface Out</label><br>
+									<input id="intout_txt" class="txtbx" style="width: 100px;" name="txt_intout" value="{{ intout }}"><br>
+									<label> Destination IP </label><br>
+									<input id="destination_txt" class="txtbx" style="width: 200px;" name="txt_destination" value="{{ dstip }}"><br>
+									<label> NAT </label><br>
+									<input id="nat_txt" class="txtbx" style="width: 200px;" name="txt_nat" value="{{ nat }}"><br>
+									<label> Port </label><br>
+									<input id="port_txt" class="txtbx" style="width: 50px;" name="txt_port" value="{{ port }}"><br>
+<p></p>
+
+                                                                                <label style="margin-left: 40px"><B> Customer short name <B></label><br>
+                                                             	<input id="customername_txt" class="txtbx" style="width: 200 px;" name="txt_customername" ><br>
+
+                                                                                <label style="margin-left: 40px"><B>IP block<B></label><br>
+                                                             	<input id="IP_txt" class="txtbx" style="width: 200 px;" name="txt_ip" ><br>
+					                        <input type="submit" id="add_btn" style="width: 100px" value="Add">
+								</div>
+								<div id="div-col2" class="column" style="width: 400px; float: left; text-align: left;">
+									<div id="prv_wrapper" style="margin-top: 12px">
+										<div id="prv_scrol" style="margin-top: 12px">
+										<label style="margin-left: 40px"><B>IP address List</B></label>
+										<table id="iplist_tbl" style="width:100%">
+                                                                                        <tr><th>whitelisting IP address</th><th>Delete</th></tr>
+							                        </table><br>
+										</div><br>
+
+                                                                <textarea id="code_txtar" name="txtar_code" rows="10" cols="90"> </textarea>
+										<button style="margin-left: 40px; width: 150px" id="codeGenerate-btn" name="btn_codeGenerate">generate code</button><p></p>
+										<button style="margin-left: 40px; width: 150px" id="push-btn" name="btn_push">Push config to the device</button><p></p>
+									</div>
+								</div>
+                              </div>
+					</fieldset>
+				</form>
+			</div>
+		</div>
+	</body>
+</html>

@@ -1,0 +1,188 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Whitelisting Form</title>
+    <link rel="stylesheet" type="text/css" href="{{ static_url('css/jquery-ui.css') }}">
+    <script src="{{ static_url('js/jquery-3.2.1.js') }}"></script>
+    <script src="{{ static_url('js/jquery-ui.js') }}"></script>
+    <script src="{{ static_url('js/ready.js') }}"></script>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #202060;
+            color: #ffffff;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: flex-start;
+            height: 100vh;
+            overflow-y: auto;
+            padding-top: 20px;
+        }
+        #sec_set {
+            background-color: #2E2E2E;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0,0,0,0.5);
+            max-width: 800px;
+            width: 100%;
+        }
+        fieldset {
+            border: none;
+        }
+        legend {
+            font-size: 1.5em;
+            margin-bottom: 10px;
+        }
+        .form-group {
+            margin-bottom: 15px;
+        }
+        .form-group label {
+            display: block;
+            margin-bottom: 5px;
+        }
+        .form-group input, .form-group select, .form-group textarea, .form-group button {
+            width: 100%;
+            padding: 8px;
+            border-radius: 4px;
+            border: 1px solid #ccc;
+            box-sizing: border-box;
+        }
+        .row {
+            display: flex;
+            flex-wrap: wrap;
+        }
+        .column {
+            flex: 1;
+            padding: 10px;
+            min-width: 300px;
+        }
+        .form-group button {
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            cursor: pointer;
+        }
+        .form-group button:hover {
+            background-color: #45a049;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+        table, th, td {
+            border: 1px solid #ccc;
+        }
+        th, td {
+            padding: 10px;
+            text-align: left;
+        }
+        textarea {
+            resize: vertical;
+            min-height: 200px; /* Set a minimum height for the textarea */
+        }
+        #div-col2 {
+            min-height: 600px; /* Ensure the second column is taller */
+        }
+    </style>
+</head>
+<body>
+    <div id="sec_set">
+        <form id="form" name="whitelistform" action="/form">
+            <fieldset>
+                <legend>IP Whitelisting Form</legend>
+                <div class="row">
+                    <div id="div-col1" class="column">
+                        <div class="form-group">
+                            <label for="url_drpbx">Endpoint / URL</label>
+                            <select id="url_drpbx" name="drpbx_URL">
+                                {% for url in urls %}
+                                    <option>{{ url }}</option>
+                                {% end %}
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label for="firewall_txt">Firewall</label>
+                            <input type="text" id="firewall_txt" name="txt_firewall" value="{{ firewall }}" readonly>
+                        </div>
+                        <div class="form-group">
+                            <label for="mgmtIP_txt">Management IP</label>
+                            <input type="text" id="mgmtIP_txt" name="txt_mgmtIP" value="{{ mgmtIP }}" readonly>
+                        </div>
+                        <div class="form-group">
+                            <label for="contextName_txt">Firewall Context</label>
+                            <input type="text" id="contextName_txt" name="txt_contextName" value="{{ contextName }}" readonly>
+                        </div>
+                        <div class="form-group">
+                            <label for="intin_txt">Interface In / Access-list</label>
+                            <input type="text" id="intin_txt" name="txt_intin" value="{{ intin }}" readonly>
+                        </div>
+                        <div class="form-group">
+                            <label for="intout_txt">Interface Out</label>
+                            <input type="text" id="intout_txt" name="txt_intout" value="{{ intout }}" readonly>
+                        </div>
+                        <div class="form-group">
+                            <label for="destination_txt">Destination IP</label>
+                            <input type="text" id="destination_txt" name="txt_destination" value="{{ dstip }}" readonly>
+                        </div>
+                        <div class="form-group">
+                            <label for="nat_txt">NAT</label>
+                            <input type="text" id="nat_txt" name="txt_nat" value="{{ nat }}" readonly>
+                        </div>
+                        <div class="form-group">
+                            <label for="port_txt">Port</label>
+                            <input type="text" id="port_txt" name="txt_port" value="{{ port }}">
+                        </div>
+                        <div class="form-group">
+                            <label for="customername_txt">Customer Short Name</label>
+                            <input type="text" id="customername_txt" name="txt_customername">
+                        </div>
+                        <div class="form-group">
+                            <label for="IP_txt">IP Block</label>
+                            <input type="text" id="IP_txt" name="txt_ip">
+                        </div>
+                        <div class="form-group">
+                            <button type="submit" id="add_btn">Add</button>
+                        </div>
+                    </div>
+                    <div id="div-col2" class="column">
+                        <div id="prv_wrapper">
+                            <div id="prv_scrol">
+                                <div class="form-group">
+                                    <label>IP Address List</label>
+                                    <table id="iplist_tbl">
+                                        <tr>
+                                            <th>Whitelisting IP Address</th>
+                                            <th>Delete</th>
+                                        </tr>
+                                    </table>
+                                </div>
+                                <div class="form-group">
+                                    <textarea id="code_txtar" name="txtar_code" rows="10" readonly></textarea>
+                                </div>
+                                <div class="form-group">
+                                    <button id="codeGenerate-btn" name="btn_codeGenerate">Generate Code</button>
+                                </div>
+                                <div class="form-group">
+                                    <label for="username_txt">Username</label>
+                                    <input type="text" id="username_txt" name="txt_username">
+                                </div>
+                                <div class="form-group">
+                                    <label for="password_txt">Password</label>
+                                    <input type="password" id="password_txt" name="txt_password">
+                                </div>
+                                <div class="form-group">
+                                    <button id="push-btn" name="btn_push">Push Config to the Device</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </fieldset>
+        </form>
+    </div>
+</body>
+</html>

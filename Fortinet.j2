@@ -1,0 +1,29 @@
+{% if context != "none" -%}
+ config vdom
+ edit {{ context }}
+{% endif -%}
+config firewall address
+{% for item in iplist -%}
+  edit {{ objectname -}} - {{- iplist[item].cidr }}
+  set subnet {{ iplist[item].cidr }}
+  next
+{% endfor -%}
+end
+config firewall addrgrp
+edit {{ objectname -}} -grp 
+set member {% for item in iplist %} {{ objectname -}} - {{- iplist[item].cidr -}} 
+{% endfor %}
+end
+config firewall policy   
+   edit 0
+      set name {{ objectname }}
+      set srcintf {{ intin }}
+      set dstintf {{ intout }}
+      set action accept
+      set srcaddr {{ objectname -}} -grp
+      set dstaddr {{ dstip }}
+      set schedule always
+      set service {{ port }}
+      set logtraffic all
+      set nat {{ nat }}
+end		

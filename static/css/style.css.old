@@ -1,0 +1,98 @@
+#main_win{
+	width: 960px;
+	height: auto;
+	margin-left: auto;
+	margin-right: auto;
+	margin-top: 11px;
+	margin-bottom : 11px;
+	background: #76508A;
+}
+
+#tbl_scl tr td:Hover{
+	background-color:#95AEC5;
+
+}
+#tbl_scl {
+	background-color: white;
+	width: 100%;
+	text-align: left;
+	height: 100px;
+}
+#tbl_scl td{
+	padding: 3px;
+	white-space: nowrap;
+	border: solid 1px #ddd;
+	font-size: 14px;
+
+}
+
+#tbl_wrapper {
+  margin-left: 10px;
+  position: relative;
+  width: 98%;
+}
+#tbl_scrol {
+  overflow: auto;
+
+}
+
+
+
+#prv_wrapper {
+	position: relative;
+	height: 200px;
+}
+#prv_scrol{
+	overflow: auto;
+	position: relative;
+	height: 180px;
+}
+
+.A {
+	position: relative;
+	width: 70px;
+	left: 40px;
+	top: 20px;
+}
+.txtbx{
+	width: 150px;
+	text-align: center;
+}
+.datetxtbx{
+	width: 100px;
+	text-align: center;
+}
+#tbl_schl{
+	background-color: white;
+	position: relative;
+	width: 100%;
+	text-align: center;
+	margin-top: 12px;
+	border-collapse: collapse;
+}
+#tbl_schl th {
+    background-color: #470B66;
+    color: white;
+	padding: 5px;
+}
+#tbl_schl td {
+
+	border-bottom: 1px solid #ddd;
+}
+
+#div-col1 {
+    float: left;
+	margin-top: 30px;
+    font-size: 18px;
+
+  }
+#div-col2 {
+    float: right;
+    margin: 10px;
+    font-size: 14px;
+  }
+
+.dropbox {
+	width:140px;
+	text-align: center;
+}
